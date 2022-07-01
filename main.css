@@ -5,8 +5,16 @@ body {
     max-width: 600px;
     background-color: white; 
     margin: 0 auto;
+    line-height: 24px;
+    padding-bottom: 100px;
 	font-family: 'Helvetica', 'Arial'
-}.cmr-17{font-size:170%;}
+}
+
+sup{
+    line-height: 14px;
+}
+
+.cmr-17{font-size:170%;}
 .cmr-12{font-size:120%;}
 .cmr-8{font-size:80%;}
 .cmti-10{ font-style: italic;}
@@ -127,5 +135,8 @@ div.abstract {width:100%;}
 .epigraphs table div .episource { text-align:right; width:100%;}
 .rotatebox{display: inline-block;}
 .figure img.graphics {margin-left:10%;}
+.test{
+    position: absolute;
+}
 /* end css.sty */
 
