@@ -2,12 +2,14 @@
 const canvas = document.getElementById("biasCanvas");
 const ctx = canvas.getContext("2d");
 
-const dx = 1
+const dx = 1;
 const dy = 1;
 
 let direction = {green: -1};
 
-let green = {x: canvas.width/2, y: canvas.height/2};
+let green = {x: canvas.width/2, y: 100};
+let red = {x: canvas.width/2, y: canvas.height-50}
+
 
 function drawBall() {
 
@@ -16,7 +18,22 @@ function drawBall() {
     ctx.fillStyle = "#32CD32";
     ctx.fill();
     ctx.closePath();
+
+    ctx.beginPath();
+    ctx.arc(canvas.width/2, canvas.height-50, 10, 0, Math.PI*2);
+    ctx.fillStyle = "#ff0000";
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.strokeStyle = "gray"
+    ctx.moveTo(canvas.width/2, canvas.height-50);
+    ctx.lineTo(green.x,green.y);
+    ctx.setLineDash([5,3]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    
 }
+
 
 
 function changeDirection() {
@@ -32,17 +49,21 @@ function fake(){
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBall();
+    let angle = Math.atan2(red.y - green.y, red.x - green.x);
 
-    if (green.x + dx*direction.green - 10 < 0){
+
+    if (green.x + dx*direction.green - 10 < 120){
       changeDirection();
     }
-    if (green.x + dx*direction.green + 10 > canvas.width)
+    if (green.x + dx*direction.green + 10 > 360)
     {
       changeDirection();
     }
-    green.x += dx*direction.green
+
+    green.x += Math.cos(angle-direction.green*Math.PI/2)*dx;
+    green.y += Math.sin(angle-direction.green*Math.PI/2)*dy;
 
   }
 setInterval(draw, 10);
-setTimeout(fake, 500)
+setTimeout(fake, 500);
 }());
